@@ -1,0 +1,746 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API_ECOMMERCE",
+    "description": "Una API para manejar todo lo relacionado a un e-commerce con sus funcionalidades basicas como crear usuarios, login, crear productos entre otras funcionalidades",
+    "contact": {},
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://db-ecommerce.onrender.com",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "crea un nuevo usuario",
+        "operationId": "createnewuser",
+        "parameters": [],
+        "requestBody": {
+          "description": "Endpoint para crear un nuevo usuario con sus datos basicos al crear el usuario se crea el carrito",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/createnewuserrequest"
+                  },
+                  {
+                    "example": {
+                      "username": "Vinicio Chavarria",
+                      "email": "vichavarria21@gmail.com",
+                      "password": "12345678"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "username": "Vinicio Chavarria",
+                "email": "vichavarria21@gmail.com",
+                "password": "12345678"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/1": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "USER"
+        ],
+        "summary": "Obtener los productos actuales del carrito por el id del usuario",
+        "operationId": "Getproductsincarbyuserid",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Endpoint para obtener los productos de un usuario utilizando el id de ese usuario trae una lista de todos sus productos"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/user/orders/1": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "USER"
+        ],
+        "summary": "Obtiene las ordenes de un usuario por su Id",
+        "operationId": "Getordersbyusersid",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "Login de usuario genera el token nesesario de autorización",
+        "operationId": "Login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Genera un token para la autorización del usuario y que ese usuario tenga acceso a los endpoint protegidos ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/LoginRequest"
+                  },
+                  {
+                    "example": {
+                      "email": "vichavarria21@gmail.com",
+                      "password": "12345678"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "email": "vichavarria21@gmail.com",
+                "password": "12345678"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/products": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Products"
+        ],
+        "summary": "Crea un producto nuevo",
+        "operationId": "CreateProduct",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Este endpoint se utiliza para la creación de productos el cual guarda el nombre, imagen, descripción del producto entre otros datos",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "encoding": {},
+              "schema": {
+                "required": [
+                  "image",
+                  "name",
+                  "description",
+                  "price",
+                  "userId"
+                ],
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "diseño svg"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "dibujo cool"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 20
+                  },
+                  "userId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Products"
+        ],
+        "summary": "Obtiene los producto donde su cantidad sea mayor que 0",
+        "operationId": "Getproductsmayoresacero",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/products/1": {
+      "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Products"
+        ],
+        "summary": "Edita la descripción de un producto",
+        "operationId": "Editdescriptionproduct",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/EditdescriptionproductRequest"
+                  },
+                  {
+                    "example": {
+                      "description": "descripcion del producto"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "description": "descripcion del producto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/productincar/products": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "ProductInCar"
+        ],
+        "summary": "Agregar al carrito",
+        "operationId": "addtocard",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Este endpoint agrega al carrito del usuario los productos que el usuario seleccione",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/addtocardrequest"
+                  },
+                  {
+                    "example": {
+                      "carId": 1,
+                      "productId": 2,
+                      "price": 20
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "carId": 1,
+                "productId": 2,
+                "price": 20
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/orders": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Crea una Orden",
+        "operationId": "CreateOrder",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "description": "Este endpoint nos ayuda a la creación de la orden del usuario",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzNzY1MzIsImV4cCI6MTY4NjM3NjgzMn0.7Mi6H9n8hRYe37mDvTlXC4copN7GpviyN710Nmfzz2aBKIxhgL3cMM7ESp8ReNIW2xRrRZJDR5g-YeogloiiVg"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateOrderRequest"
+                  },
+                  {
+                    "example": {
+                      "userId": 1,
+                      "totalPrice": 100
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "userId": 1,
+                "totalPrice": 100
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/orders/1": {
+      "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Completa la orden",
+        "operationId": "CompletedOrder",
+        "parameters": [],
+        "requestBody": {
+          "description": "Con este endpoint se completa la orden del usuario ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CompletedOrderRequest"
+                  },
+                  {
+                    "example": {
+                      "carId": 1,
+                      "email": "vichavarria21@gmail.com"
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "carId": 1,
+                "email": "vichavarria21@gmail.com"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/productInOrder/orders": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Agrega productos a la orden",
+        "operationId": "Addproductsinorder",
+        "parameters": [],
+        "requestBody": {
+          "description": "con este endpoint se ban agregando los productos que selecciono el usuario a la orden",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/AddproductsinorderRequest"
+                  },
+                  {
+                    "example": {
+                      "orderId": 3,
+                      "productId": 2,
+                      "price": 40,
+                      "quantity": 1
+                    }
+                  }
+                ]
+              },
+              "example": {
+                "orderId": 3,
+                "productId": 2,
+                "price": 40,
+                "quantity": 1
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "createnewuserrequest": {
+        "title": "createnewuserrequest",
+        "required": [
+          "username",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "username": "Vinicio Chavarria",
+          "email": "vichavarria21@gmail.com",
+          "password": "12345678"
+        }
+      },
+      "LoginRequest": {
+        "title": "LoginRequest",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "vichavarria21@gmail.com",
+          "password": "12345678"
+        }
+      },
+      "addtocardrequest": {
+        "title": "addtocardrequest",
+        "required": [
+          "carId",
+          "productId",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "carId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "carId": 1,
+          "productId": 2,
+          "price": 20
+        }
+      },
+      "CreateOrderRequest": {
+        "title": "CreateOrderRequest",
+        "required": [
+          "userId",
+          "totalPrice"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPrice": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "userId": 1,
+          "totalPrice": 100
+        }
+      },
+      "CompletedOrderRequest": {
+        "title": "CompletedOrderRequest",
+        "required": [
+          "carId",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "carId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "carId": 1,
+          "email": "vichavarria21@gmail.com"
+        }
+      },
+      "EditdescriptionproductRequest": {
+        "title": "EditdescriptionproductRequest",
+        "required": [
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "description": "descripcion del producto"
+        }
+      },
+      "AddproductsinorderRequest": {
+        "title": "AddproductsinorderRequest",
+        "required": [
+          "orderId",
+          "productId",
+          "price",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "orderId": 3,
+          "productId": 2,
+          "price": 40,
+          "quantity": 1
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "USER"
+    },
+    {
+      "name": "Products"
+    },
+    {
+      "name": "ProductInCar"
+    },
+    {
+      "name": "Orders"
+    }
+  ]
+}
