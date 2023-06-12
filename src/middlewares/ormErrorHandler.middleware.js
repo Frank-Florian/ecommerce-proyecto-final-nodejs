@@ -18,7 +18,7 @@ const ormErroHandler = (err, req, res, next) => {
   ) {
     return res.status(409).json({
       name: err.name,
-      message: "Database conecction error",
+      message: "Se produjo un error de conexión con la base de datos.",
     });
   }
 

@@ -20,7 +20,7 @@ db.sync()
 const PORT = process.env.PORT || 8000;
 
 app.get("/", (req, res) => {
-  res.send("Servidor trabajando OK");
+  res.send("Servidor OK");
 });
 
 // agrupar todas las rutas en un archivo
@@ -28,5 +28,5 @@ apiRoutes(app);
 errorRoutes(app);
 
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+  console.log(`A la escucha en el puerto ${PORT}`);
 });

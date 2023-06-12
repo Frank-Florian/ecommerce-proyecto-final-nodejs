@@ -1,5 +1,5 @@
 {
-  "name": "db_ecommerce",
+  "name": "proyecto_ecommerce",
   "version": "1.0.0",
   "description": "Esta es una API para un foro creada con node, [express](https://expressjs.com/), sequelize y postgres.",
   "main": "index.js",

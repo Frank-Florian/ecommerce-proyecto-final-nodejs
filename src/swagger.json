@@ -1,14 +1,14 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API_ECOMMERCE",
-    "description": "Una API para manejar todo lo relacionado a un e-commerce con sus funcionalidades basicas como crear usuarios, login, crear productos entre otras funcionalidades",
+    "title": "API_e-commerce",
+    "description": "La API proporciona todas las funcionalidades básicas necesarias para administrar un e-commerce. Permite a los usuarios crear cuentas, iniciar sesión, administrar sus perfiles y realizar acciones relacionadas con productos.",
     "contact": {},
     "version": "1.0"
   },
   "servers": [
     {
-      "url": "https://db-ecommerce.onrender.com",
+      "url": "https://ecommerce-proyecto-final-nodejs.onrender.com",
       "variables": {}
     }
   ],
@@ -18,11 +18,11 @@
         "tags": [
           "USER"
         ],
-        "summary": "crea un nuevo usuario",
+        "summary": "crear nuevo usuario",
         "operationId": "createnewuser",
         "parameters": [],
         "requestBody": {
-          "description": "Endpoint para crear un nuevo usuario con sus datos basicos al crear el usuario se crea el carrito",
+          "description": "Endpoint para crear un nuevo usuario con sus datos básicos. Al momento de crear el usuario, se generará automáticamente un carrito asociado",
           "content": {
             "application/json": {
               "schema": {
@@ -32,17 +32,17 @@
                   },
                   {
                     "example": {
-                      "username": "Vinicio Chavarria",
-                      "email": "vichavarria21@gmail.com",
+                      "username": "usuario1",
+                      "email": "usuario1@gmail.com",
                       "password": "12345678"
                     }
                   }
                 ]
               },
               "example": {
-                "username": "Vinicio Chavarria",
-                "email": "vichavarria21@gmail.com",
-                "password": "12345678"
+                "username": "usuario2",
+                "email": "usuario2@gmail.com",
+                "password": "87654321"
               }
             }
           },
@@ -67,7 +67,7 @@
         "tags": [
           "USER"
         ],
-        "summary": "Obtener los productos actuales del carrito por el id del usuario",
+        "summary": "Obtener los productos actuales del carrito utilizando el ID del usuario como referencia",
         "operationId": "Getproductsincarbyuserid",
         "parameters": [
           {
@@ -78,12 +78,12 @@
             "style": "simple",
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+              "example": "i1cv9VJ1v6wHxOQ71kAN7FL6EYGX3C_lYtU2MpbdoeNoVc6NWgimaxXsh6nqfeo3nrs2DyL1Zn3AJPLjEEmtafWBmiACMiLrjhiEIj1lsIc0t1mvPhMOG3ip1x1c19-"
             }
           }
         ],
         "requestBody": {
-          "description": "Endpoint para obtener los productos de un usuario utilizando el id de ese usuario trae una lista de todos sus productos"
+          "description": "Endpoint para obtener los productos de un usuario mediante su ID. Este endpoint devuelve una lista que contiene todos los productos asociados a ese usuario."
         },
         "responses": {
           "200": {
@@ -104,7 +104,7 @@
         "tags": [
           "USER"
         ],
-        "summary": "Obtiene las ordenes de un usuario por su Id",
+        "summary": "Endpoint para obtener las órdenes de un usuario utilizando su ID.",
         "operationId": "Getordersbyusersid",
         "parameters": [
           {
@@ -133,11 +133,11 @@
         "tags": [
           "USER"
         ],
-        "summary": "Login de usuario genera el token nesesario de autorización",
+        "summary": "El inicio de sesión del usuario genera un token de autorización necesario.",
         "operationId": "Login",
         "parameters": [],
         "requestBody": {
-          "description": "Genera un token para la autorización del usuario y que ese usuario tenga acceso a los endpoint protegidos ",
+          "description": "El proceso de inicio de sesión del usuario genera un token de autorización que le otorga acceso a los endpoint protegidos.",
           "content": {
             "application/json": {
               "schema": {
@@ -147,14 +147,14 @@
                   },
                   {
                     "example": {
-                      "email": "vichavarria21@gmail.com",
+                      "email": "usuario1@gmail.com",
                       "password": "12345678"
                     }
                   }
                 ]
               },
               "example": {
-                "email": "vichavarria21@gmail.com",
+                "email": "usuario2@gmail.com",
                 "password": "12345678"
               }
             }
@@ -180,18 +180,18 @@
         "tags": [
           "Products"
         ],
-        "summary": "Crea un producto nuevo",
+        "summary": "Crear un producto nuevo",
         "operationId": "CreateProduct",
         "parameters": [
           {
             "name": "access-token",
             "in": "header",
-            "description": "Este endpoint se utiliza para la creación de productos el cual guarda el nombre, imagen, descripción del producto entre otros datos",
+            "description": "Este endpoint se utiliza para la creación de productos. Permite guardar datos como el nombre, imagen, descripción y otros detalles relacionados con el producto.",
             "required": true,
             "style": "simple",
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+              "example": "XC1wQcLgMgLpuv0d6ljG1F7aNmPVwB7QBLV6zOQHNyLXKv1_WHPAamFBfSnXpOc7K3e3of3aVAxeJN5Xm6iOaijJyuv6dnlJB1F7mM8OeX6IyRrRrGXZahcvJI0nbAjn0ln1c1Eo1XQpAsre1pIGs0YcZ9JNN3uzXL1veAsg9bA"
             }
           }
         ],
@@ -254,7 +254,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Obtiene los producto donde su cantidad sea mayor que 0",
+        "summary": "Obtener los productos cuya cantidad sea mayor que cero",
         "operationId": "Getproductsmayoresacero",
         "parameters": [
           {
@@ -265,7 +265,7 @@
             "style": "simple",
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+              "example": "sInR5cCI6IkpXVCJ9eyJhbGciOiJIUzUxMiI.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
             }
           }
         ],
@@ -288,7 +288,7 @@
         "tags": [
           "Products"
         ],
-        "summary": "Edita la descripción de un producto",
+        "summary": "Editar la descripción de un producto",
         "operationId": "Editdescriptionproduct",
         "parameters": [
           {
@@ -350,12 +350,12 @@
           {
             "name": "access-token",
             "in": "header",
-            "description": "Este endpoint agrega al carrito del usuario los productos que el usuario seleccione",
+            "description": "Endpoint para agregar los productos seleccionados por el usuario al carrito de compras.",
             "required": true,
             "style": "simple",
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
+              "example": "MiIsInR5cCI6IkpXVCJ9eyJhbGciOiJIUzUx.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzODE3MDEsImV4cCI6MTY4NjM5OTcwMX0.Ppv9PSnXM2oagRAd11VAf3o3eK7cOpXnSfBFmAAPHW1_vKLXyNHQOz6VLBQ7BwVPmNa7F1Gjl6d0vuPlgMgLcQ"
             }
           }
         ],
@@ -411,12 +411,12 @@
           {
             "name": "access-token",
             "in": "header",
-            "description": "Este endpoint nos ayuda a la creación de la orden del usuario",
+            "description": "Este endpoint permite crear una orden para el usuario.",
             "required": true,
             "style": "simple",
             "schema": {
               "type": "string",
-              "example": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzNzY1MzIsImV4cCI6MTY4NjM3NjgzMn0.7Mi6H9n8hRYe37mDvTlXC4copN7GpviyN710Nmfzz2aBKIxhgL3cMM7ESp8ReNIW2xRrRZJDR5g-YeogloiiVg"
+              "example": "UzUxMiIsInR5cCI6IkpXVCJeyJhbGciOiJI9.eyJmaXJzdG5hbWUiOm51bGwsImxhc3RuYW1lIjpudWxsLCJpZCI6MSwidXNlcm5hbWUiOiJWaW5pY2lvIENoYXZhcnJpYSIsImVtYWlsIjoidmljaGF2YXJyaWEyMUBnbWFpbC5jb20iLCJpYXQiOjE2ODYzNzY1MzIsImV4cCI6MTY4NjM3NjgzMn0.7Mi6H9n8hRYe37mDvTlXC4copN7GpviyN710Nmfzz2aBKIxhgL3cMM7ESp8ReNIW2xRrRZJDR5g-YeogloiiVg"
             }
           }
         ],
@@ -468,7 +468,7 @@
         "operationId": "CompletedOrder",
         "parameters": [],
         "requestBody": {
-          "description": "Con este endpoint se completa la orden del usuario ",
+          "description": "Este endpoint se utiliza para completar la orden del usuario.",
           "content": {
             "application/json": {
               "schema": {
@@ -479,14 +479,14 @@
                   {
                     "example": {
                       "carId": 1,
-                      "email": "vichavarria21@gmail.com"
+                      "email": "usuario1@gmail.com"
                     }
                   }
                 ]
               },
               "example": {
                 "carId": 1,
-                "email": "vichavarria21@gmail.com"
+                "email": "usuario1@gmail.com"
               }
             }
           },
@@ -515,7 +515,7 @@
         "operationId": "Addproductsinorder",
         "parameters": [],
         "requestBody": {
-          "description": "con este endpoint se ban agregando los productos que selecciono el usuario a la orden",
+          "description": "Mediante este endpoint, los productos seleccionados por el usuario se van agregando a la orden en curso.",
           "content": {
             "application/json": {
               "schema": {
@@ -575,8 +575,8 @@
           }
         },
         "example": {
-          "username": "Vinicio Chavarria",
-          "email": "vichavarria21@gmail.com",
+          "username": "usuario1",
+          "email": "usuario1@gmail.com",
           "password": "12345678"
         }
       },
@@ -596,7 +596,7 @@
           }
         },
         "example": {
-          "email": "vichavarria21@gmail.com",
+          "email": "usuario1@gmail.com",
           "password": "12345678"
         }
       },
@@ -668,7 +668,7 @@
         },
         "example": {
           "carId": 1,
-          "email": "vichavarria21@gmail.com"
+          "email": "usuario1@gmail.com"
         }
       },
       "EditdescriptionproductRequest": {

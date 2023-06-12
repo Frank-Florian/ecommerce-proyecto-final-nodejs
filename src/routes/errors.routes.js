@@ -10,7 +10,7 @@ const errorRoutes = (app) => {
   // manejar el 404
   app.use("*", (req, res) => {
     res.status(404).json({
-      message: "El backend se encuentra trabajando, pronto tendremos esta ruta",
+      message: "Pronto tendremos esta ruta disponible para ti.",
     });
   });
 };

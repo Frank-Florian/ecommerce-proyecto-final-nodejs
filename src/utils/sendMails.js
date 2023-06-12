@@ -9,7 +9,7 @@ const sendMail = (email, doc, attachments) => {
       from: process.env.G_USER,
       to: email,
       subject: "Bienvenido",
-      text: "Este seria el mensaje en texto plano",
+      text: "Hola mundo!",
       html: doc,
       attachments,
     })

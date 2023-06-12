@@ -8,16 +8,12 @@ const isAdmin = (req, res, next) => {
     return next({
       status: 401,
       name: "No admin",
-      message: `Sorry ${username} only admins can access here`,
+      message: `Sorry ${username} Solo los administradores tienen acceso a esta área.`,
     });
   }
   next();
 };
 
-// hasRoles --> va a dejar pasar los siguientes roles...
-// recibe un arreglo... de roles
-// hasRoles(3)
-//
 const hasRoles = (...roles) => {
   // devolver una función de middleware
   return (req, res, next) => {
@@ -26,7 +22,7 @@ const hasRoles = (...roles) => {
       next({
         status: 401,
         name: "Role required",
-        message: `User have not required role`,
+        message: `El usuario no tiene el rol requerido para acceder a esta función`,
       });
     }
     next();
